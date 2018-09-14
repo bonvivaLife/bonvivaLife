@@ -1,5 +1,3 @@
 #!/bin/bash
 
-export FLASK_APP=main.py
-
-flask run --host=0.0.0.0
+python3 main.py
