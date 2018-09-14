@@ -1,0 +1,2920 @@
+{
+	"info": {
+		"_postman_id": "677d1d3d-f0d0-43cc-bdc5-20b71b0885ad",
+		"name": "test azure",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth0",
+			"item": [
+				{
+					"name": "Authorization Code password cozbanetto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b59fb44e-b08c-4eab-9ae0-2642c6eaa40d",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"",
+									"pm.globals.set(\"AuthTokenCoz\" , \"Bearer \" + jsonData.access_token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"grant_type\":\"password\",\r\n\"username\": \"cozccco@hotmail.com\",\r\n\"password\": \"XXXX\",\r\n\"audience\": \"https://openbanking.com/api\", \r\n\"scope\": \"openid profile email\", \r\n\"client_id\": \"q8IMYs1SKzKtXLov8V3JZoz1hN70x3A7\", \r\n\"client_secret\": \"Qg2Zf0WDouLl11RooZWaSRmS3xDYONLB0gbFbWFjRu_lQc9rZ4Kr69WBa4mtV1TX\"}\r\n"
+						},
+						"url": {
+							"raw": "https://gbproject.auth0.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"gbproject",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						},
+						"description": "This is the OAuth 2.0 grant that regular web apps utilize in order to access an API. Use this endpoint to exchange an Authorization Code for an Access Token."
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization Code password Gmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2b117d96-b50e-464b-9c30-b5ce5818ad7f",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"",
+									"pm.globals.set(\"AuthTokenGm\" , \"Bearer \" + jsonData.access_token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"grant_type\":\"password\",\r\n\"username\": \"aaaa@gmail.com\",\r\n\"password\": \"XXXX\",\r\n\"audience\": \"https://openbanking.com/api\", \r\n\"scope\": \"openid profile email\", \r\n\"client_id\": \"q8IMYs1SKzKtXLov8V3JZoz1hN70x3A7\", \r\n\"client_secret\": \"Qg2Zf0WDouLl11RooZWaSRmS3xDYONLB0gbFbWFjRu_lQc9rZ4Kr69WBa4mtV1TX\"}\r\n"
+						},
+						"url": {
+							"raw": "https://gbproject.auth0.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"gbproject",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						},
+						"description": "This is the OAuth 2.0 grant that regular web apps utilize in order to access an API. Use this endpoint to exchange an Authorization Code for an Access Token."
+					},
+					"response": []
+				},
+				{
+					"name": "Manage users : Create a user username/password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "q8IMYs1SKzKtXLov8V3JZoz1hN70x3A7",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "emailOFuser",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password",
+									"type": "text"
+								},
+								{
+									"key": "connection",
+									"value": "Username-Password-Authentication",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://gbproject.auth0.com/dbconnections/signup",
+							"protocol": "https",
+							"host": [
+								"gbproject",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"dbconnections",
+								"signup"
+							]
+						},
+						"description": "Given the user credentials, the connection specified and the Auth0 account information, it will create a new user. You can then authenticate with this user using the /oauth/ro endpoint. This endpoint only works for database connections."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"nickname\": \"t75249cozbanetto@hotmail.com\",\n        \"surname\": \"nick\",\n        \"lastname\": \"testlast name\",\n        \"dateOfBirth\": \"2018-01-01\",\n        \"countryofbirth\": \"IT\",\n        \"countryDomicile\": \"IT\",\n        \"nationality\": \"IT\",\n        \"city\": \"BIRMENSDORF\",\n        \"street\": \"DORFLISTRASSE\" ,\n        \"gender\": \"M\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/customers/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 12,\n    \"nickname\": \"t7cozbanetto@hotmail.com\",\n    \"surname\": \"nick\",\n    \"lastname\": \"testlast name\",\n    \"dateOfBirth\": \"2018-01-02\",\n    \"countryofbirth\": \"IT\",\n    \"countryDomicile\": \"CH\",\n    \"nationality\": \"IT\",\n    \"city\": \"BIRMENSDORF\",\n    \"street\": \"DORFLISTRASSE 2 A\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/customers/12",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByname",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/customers?nickname=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers"
+							],
+							"query": [
+								{
+									"key": "nickname",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search using filter  UNSECURED Simple",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\n\t\t\t\t{\n\t\"attribute\" : \" cus.city \" ,\n\t\"operator\" : \" = \" ,\n\t\"value\" : \" 'Aarau'  \" \n\t} \n\t\n\t\n\t] ,\n\t\n\t\"sorting\" : \" cus.nickname asc\" ,\n\t\"top\" : 101\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/customers/search/unsecuredsimple",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"search",
+								"unsecuredsimple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search using filter  UNSECURED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"kyc.job\" ,\n\t\"operator\" : \"like\" ,\n\t\"value\" : \"'%RETIRED%'\" \n\t} ,\n\t{\n\t\"attribute\" : \"nationality\" ,\n\t\"operator\" : \"=\" ,\n\t\"value\" : \"'CH'\" \n\t}\n\t] ,\n\t\n\t\"sorting\" : \" nickname asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/customers/search/unsecured",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"search",
+								"unsecured"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEPRECATED Search all",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/customers/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEPRECATED get by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"value": "{{AuthTokenCoz}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{url}}/customers/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delegation",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\" : \"cozbanetto@hotmail.com\" ,\n  \"delegatedTo\" : \"giuliano.bana@gmail.com\" \n}"
+						},
+						"url": {
+							"raw": "{{url}}/delegations/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"delegations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\" : \"cia\" ,\n  \"delegatedUser\" : \"nick\" \n}"
+						},
+						"url": {
+							"raw": "{{url}}/delegations/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"delegations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search my Deletegated",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/delegations/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"delegations",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Filter NOT SECURED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"delegatedTo\" ,\n\t\"operator\" : \"like\" ,\n\t\"value\" : \"'%giu%'\" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" username asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/delegations/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"delegations",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kyc",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\t{ \"customerid\":  8 ,\n       \"job\": \"RETIRED\",\n        \"annualIncome\": 1,\n        \"annualSpending\": 2000,\n        \"totalWealth\": 3,\n        \"maritalstatus\": 1,\n        \"numberofkids\": 0,\n        \"numberofcar\": 2,\n        \"pep\": false\n   }"
+						},
+						"url": {
+							"raw": "{{url}}/knowyourcustomer/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"knowyourcustomer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/knowyourcustomer/7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"knowyourcustomer",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"id\": 11,\n            \"customerid\": 8,\n            \"job\": \"RETIRED\",\n            \"annualIncome\": 1,\n            \"annualSpending\": 21000,\n            \"totalWealth\": 3,\n            \"maritalstatus\": 1,\n            \"numberofkids\": 0,\n            \"numberofcar\": 2,\n            \"pep\": false,\n            \"houseHolder\": false\n        }"
+						},
+						"url": {
+							"raw": "{{url}}/knowyourcustomer/11",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"knowyourcustomer",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Filter SECURED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenGm}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"numberofkids\" ,\n\t\"operator\" : \"=\" ,\n\t\"value\" : \" 0 \" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" e.id asc\",\n\t\t\"unSecured\" : true \n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/knowyourcustomer/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"knowyourcustomer",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEPRECATED get from customer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/customers/6/kyc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"6",
+								"kyc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bankingrelation",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"customerid\": 600816 ,\n    \"productid\": 1,\n    \"active\": true,\n\t\"openingDate\": \"2018-01-08\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/bankingrelations/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bankingrelations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/bankingrelations/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bankingrelations",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"customerid\": 12,\n        \"type\": 1,\n        \"status\": \"CLOSE\"\n    }"
+						},
+						"url": {
+							"raw": "{{url}}/bankingrelations/12",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bankingrelations",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search FIlter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"productid\" ,\n\t\"operator\" : \"=\" ,\n\t\"value\" : \"1\" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" e.id asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/bankingrelations/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bankingrelations",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEPRECATED list bankingRelation of a customer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/customers/6/bankingrelations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"6",
+								"bankingrelations"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Payment",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{AuthTokenCoz}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{  \"accountid\" : 1 ,\n    \"iban\": \"IBAN\",\n    \"beneficiary\": \"beneficiary\",\n    \"currency\": \"EUR\" ,\n    \"orderdate\" : \"2018-11-01\",\n    \"amount\" : 10.2 ,\n    \"description\" : \"payment for crippe\" ,\n    \"frequency\" : \"MONTHLY\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/payments/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{AuthTokenCoz}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+								},
+								"url": {
+									"raw": "{{url}}/payments/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{AuthTokenCoz}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n        \"id\": 1,\n        \"customerid\": 12,\n        \"type\": 1,\n        \"status\": \"CLOSE\"\n    }"
+								},
+								"url": {
+									"raw": "{{url}}/payments/12",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"12"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search  FIlter",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{AuthTokenCoz}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"description\" ,\n\t\"operator\" : \"like\" ,\n\t\"value\" : \"'%crippe%'\" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" e.id asc\"\n\n}"
+								},
+								"url": {
+									"raw": "{{url}}/payments/search",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list all payment no security",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{AuthTokenCoz}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/payments/search",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										"search"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Create safekeeping",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"bankingrelationid\": 4 ,\n    \"type\": \"SAFEKEEPING\",\n    \"iban\": \"\",\n    \"currency\": \"EUR\",\n    \"active\": true ,\n\t\"openingDate\": \"2018-01-08\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create CashAccount",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"bankingrelationid\": 4 ,\n    \"type\": \"CASH\",\n    \"iban\": \"ITYY0001201\",\n    \"currency\": \"EUR\",\n    \"active\": true ,\n\t\"openingDate\": \"2018-01-08\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"customerid\": 12,\n        \"type\": 1,\n        \"status\": \"CLOSE\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8888/accounts/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"accounts",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cards",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/1/cards",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"1",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/1/payments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"1",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cash balance",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/2/balancecash",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"2",
+								"balancecash"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sec balance",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/1/balancesec",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"1",
+								"balancesec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cash Transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/2/cashtransactions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"2",
+								"cashtransactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sec transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/1/sectransactions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"1",
+								"sectransactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Filter NOT SECURED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"type\" ,\n\t\"operator\" : \"=\" ,\n\t\"value\" : \"'SAFEKEEPING'\" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" e.id asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Filter  SECURED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenGm}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"type\" ,\n\t\"operator\" : \"=\" ,\n\t\"value\" : \"'SAFEKEEPING'\" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" e.id asc\" ,\n\t\"unSecured\" : false\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/accounts/search/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"accounts",
+								"search",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEPRECATED get from customer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/customers/12/bankingrelations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"12",
+								"bankingrelations"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Transaction Sec",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"accountid\": 1,\n            \"sign\": \"BUY\",\n            \"quantity\": 300,\n            \"valuedate\": \"2018-09-17\",\n            \"isin\": \"CH0012138530\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/sectransactions/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sectransactions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/sectransactions/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sectransactions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"customerid\": 12,\n        \"type\": 1,\n        \"status\": \"CLOSE\"\n    }"
+						},
+						"url": {
+							"raw": "{{url}}/sectransactions/12",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sectransactions",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\n\t] ,\n\t\n\t\"sorting\" : \" e.id asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/sectransactions/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sectransactions",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Transaction Cash",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"accountid\" : 2 ,\n    \"currency\": \"EUR\",\n    \"sign\": \"CREDIT\",\n    \"valuedate\" : \"2018-08-01\",\n    \"amount\" : 4900.2 ,\n    \"description\" : \"SALARY\" \n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/cashtransactions/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cashtransactions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/cashtransactions/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cashtransactions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 1,\n        \"accountid\": 2,\n        \"currency\": \"EUR\",\n        \"sign\": \"DEBIT\",\n        \"amount\": 10,\n        \"valuedate\": \"2017-12-31\",\n        \"description\": \"payment for crippea\"\n    }"
+						},
+						"url": {
+							"raw": "{{url}}/transactions/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"transactions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \" e.currency\" ,\n\t\"operator\" : \"=\" ,\n\t\"value\" : \"'USD'\" \n\t} \t] ,\n\t\"sorting\" : \" e.id asc\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/cashtransactions/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cashtransactions",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Security Master",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"bankingrelationid\": 2 ,\n    \"type\": \"CASH\",\n    \"iban\": \"ITYY0001201\",\n    \"currency\": \"EUR\",\n    \"active\": true ,\n\t\"openingDate\": \"2018-01-08\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/products/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/bankingrelations/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"bankingrelations",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t\t{\n\t\"andOr\" : \" and \" , \n\t\"attribute\" : \"isin\" ,\n\t\"operator\" : \" =  \" ,\n\t\"value\" : \"'CH0012138530'\" \n\t} \n\t\n\t] ,\n\t\n\t\"sorting\" : \" ISIN asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/securities/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"securities",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Filter price",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"andOr\" : \" and \" , \n\t\"attribute\" : \"isin\" ,\n\t\"operator\" : \" =  \" ,\n\t\"value\" : \"'IT0000336518'\" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" ISIN asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/securitiesprice/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"securitiesprice",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"customerid\": 12,\n        \"type\": 1,\n        \"status\": \"CLOSE\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8888/accounts/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"accounts",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Hobbies",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"customerid\": 6 ,\n    \"description\": \"Animals\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hobbies/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hobbies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/hobbies/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hobbies",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"customerid\": 12,\n        \"type\": 1,\n        \"status\": \"CLOSE\"\n    }"
+						},
+						"url": {
+							"raw": "{{url}}/bankingrelations/12",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"bankingrelations",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search FIlter NOT SECURED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"e.id\" ,\n\t\"operator\" : \"=\" ,\n\t\"value\" : \"1\" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" e.id asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/hobbies/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"hobbies",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEPRECATED list bankingRelation of a customer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/customers/6/bankingrelations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								"6",
+								"bankingrelations"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Card",
+			"item": [
+				{
+					"name": "Create DEBIT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"cardnumber\": \"121-1212-1212-000\" ,\n    \"type\": \"DEBIT\",\n    \"accountid\": 2,\n    \"circuit\": \"NONE\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/cards/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cards",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create CREDIT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"cardnumber\": \"121-1212-1212-000\" ,\n    \"type\": \"CREDIT\",\n    \"accountid\": 1,\n    \"circuit\": \"AMEX\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/cards/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cards",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"customerid\": 12,\n        \"type\": 1,\n        \"status\": \"CLOSE\"\n    }"
+						},
+						"url": {
+							"raw": "{{url}}/cards/12",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cards",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/cards/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cards",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search FIlter NOT SECURED",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\t{\n\t\"attribute\" : \"circuit\" ,\n\t\"operator\" : \"=\" ,\n\t\"value\" : \"AMEX\" \n\t} \n\t] ,\n\t\n\t\"sorting\" : \" id asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/cards/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cards",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEPRECATED list all cards",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/cards/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cards",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{          \"description\": \"SILVER\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/products/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"customerid\" : 12,\n  \"job\" : \"job\" ,\n  \"annualincome\": 1,\n  \"annualspending\" : 2, \n  \"totalwealth\": 3, \n  \"maritalstatus\" : 4\n  \n}"
+						},
+						"url": {
+							"raw": "{{url}}/products/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\n\t\"filter\" : [\t\n\n\t] ,\n\t\n\t\"sorting\" : \" e.id asc\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/products/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{AuthTokenCoz}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1,\n        \"customerid\": 12,\n        \"type\": 1,\n        \"status\": \"CLOSE\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8888/accounts/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"accounts",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a54081c-fe23-4418-94a9-c7c09073b7c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b8b42f1-96d6-4437-b87f-01a7bac9a1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "altro",
+			"item": [
+				{
+					"name": "userInfo: get info from token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"fullName\" : \"cia\" ,\n  \"nickName\" : \"nick\" ,\n  \"email\" : \"hasda\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/partner/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"partner",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create plan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"fullName\" : \"cia\" ,\n  \"nickName\" : \"nick\" ,\n  \"email\" : \"hasda\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/partner/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"partner",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get  from azure",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://gbisthename.azurewebsites.net/mezzi/8",
+							"protocol": "https",
+							"host": [
+								"gbisthename",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"mezzi",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create from azure",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"description\" : \"salary increase for giuliano 8\" }"
+						},
+						"url": {
+							"raw": "https://gbisthename.azurewebsites.net/mezzi/",
+							"protocol": "https",
+							"host": [
+								"gbisthename",
+								"azurewebsites",
+								"net"
+							],
+							"path": [
+								"mezzi",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
