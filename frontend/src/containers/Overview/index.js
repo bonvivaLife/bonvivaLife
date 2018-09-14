@@ -7,33 +7,22 @@ import {
   incrementAsync,
   decrement,
   decrementAsync
-} from '../actions/counter'
+} from '../../actions/counter'
 
-const Home = props => (
-  <div>
-    <h1>Home</h1>
-    <p>Count: {props.count}</p>
+import Container from '../../components/Container'
+import Button from '../../components/Button'
 
-    <p>
-      <button onClick={props.increment}>Increment</button>
-      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
-        Increment Async
-      </button>
-    </p>
+import Logo from '../../img/logo.png'
+import {OverviewContainer} from './style'
 
-    <p>
-      <button onClick={props.decrement}>Decrement</button>
-      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
-        Decrement Async
-      </button>
-    </p>
-
-    <p>
-      <button onClick={() => props.changePage()}>
-        Go to about page via redux
-      </button>
-    </p>
-  </div>
+const Overview = props => (
+  <Container>
+    <OverviewContainer>
+      <img src={Logo} />
+      <h1><strong>Infinite security</strong> for your data and contracts</h1>
+      <Button>Get started</Button>
+    </OverviewContainer>
+  </Container>
 )
 
 const mapStateToProps = ({ counter }) => ({
@@ -57,4 +46,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home)
+)(Overview)
