@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import theme from '../../theme'
+import { Link } from 'react-router-dom';
 
 
 export const ButtonWrapper = styled.button`
@@ -16,8 +17,12 @@ export const ButtonWrapper = styled.button`
     vertical-align: middle;
     cursor: pointer;
     transition: background ease 0.3s;
+    text-decoration: none;
+    text-align: center;
 
     &:hover {
         background: #50385e;
     }
 `
+
+export const ButtonLink = ButtonWrapper.withComponent(Link)

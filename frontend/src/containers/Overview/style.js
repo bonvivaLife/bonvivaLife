@@ -6,17 +6,17 @@ export const OverviewContainer = styled.div`
     display: flex;
     width: 100%;
     flex-direction: column;
-    align-items: center;
     background: white;
     min-height: 40vh;
     box-shadow: 2px 2px 11px 0px rgba(0,0,0,0.36);
-    margin-top: 10vh;
+    margin-top: 34px;
     padding: 48px;
     color: ${theme.darkBlue};
 
     > img {
-        width: 600px;
+        width: 300px;
         height: auto;
+        margin-bottom: 40px;
     }
 
     > h1 {

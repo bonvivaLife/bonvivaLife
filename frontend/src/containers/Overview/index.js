@@ -10,38 +10,31 @@ import {
 } from '../../actions/counter'
 
 import Container from '../../components/Container'
-import Button from '../../components/Button'
+import ContractList from '../../components/ContractList'
+import ContractRow from '../../components/ContractRow'
 
-import Logo from '../../img/logo.png'
 import {OverviewContainer} from './style'
+import Logo from '../../img/logo.png'
+
 
 const Overview = props => (
   <Container>
     <OverviewContainer>
       <img src={Logo} />
-      <h1><strong>Infinite security</strong> for your data and contracts</h1>
-      <Button>Get started</Button>
+      <ContractList>{
+        props.contracts && props.contracts.map((contract, index) => (
+        <ContractRow contract={contract} key={contract.id || index} />))}
+      </ContractList>
     </OverviewContainer>
   </Container>
 )
 
-const mapStateToProps = ({ counter }) => ({
-  count: counter.count,
-  isIncrementing: counter.isIncrementing,
-  isDecrementing: counter.isDecrementing
+const mapStateToProps = state => ({
+  contracts: state.data.contracts
 })
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      increment,
-      incrementAsync,
-      decrement,
-      decrementAsync,
-      changePage: () => push('/about-us')
-    },
-    dispatch
-  )
+const mapDispatchToProps = dispatch => ({
+})
 
 export default connect(
   mapStateToProps,

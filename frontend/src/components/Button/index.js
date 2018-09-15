@@ -1,3 +1,12 @@
-import {ButtonWrapper} from './style'
+import React from 'react'
+import {ButtonWrapper, ButtonLink} from './style'
 
-export default ButtonWrapper
+
+const Button = (props) => {
+    if(props.to) {
+        return <ButtonLink {...props} />
+    } else {
+        return <ButtonWrapper {...props} />
+    }
+}
+export default Button
