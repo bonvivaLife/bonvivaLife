@@ -125,6 +125,7 @@ class Detail extends React.Component{
             background={buttonOptions.color} 
             disabled={!buttonOptions.available}
             onClick={this.showModal}
+            hideSpan={true}
           >
             {buttonOptions.label}
           </Button>

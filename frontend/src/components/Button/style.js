@@ -45,6 +45,7 @@ export const ButtonWrapper = styled.button`
     }
 
     > span {
+        display: ${p => p.hideSpan ? 'none' : 'inline'};
         font-weight: 400;
         font-style: italic;
     }
