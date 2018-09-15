@@ -1,4 +1,8 @@
-orig_data = [
+orig_data = \
+{
+        'balance':[],
+        'contracts':[
+
                 {
                     'id':0,
                     'provider':"SBB",
@@ -37,3 +41,4 @@ orig_data = [
                     },
                 ]
 
+        }

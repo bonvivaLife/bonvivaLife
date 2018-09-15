@@ -41,10 +41,10 @@ def terminate(user_id):
     user_id = int(user_id)
     found = False
     for index in range(len(d)):
-        if d[index]['id'] == user_id:
-            if d[index]['status'] != s.running:
+        if d['contracts'][index]['id'] == user_id:
+            if d['contracts'][index]['status'] != s.running:
                 raise RuntimeError("State of ID {} has to be {} for termination".format(user_id, s.running))
-            d[index]['status'] = s.cancellation_requested
+            d['contracts'][index]['status'] = s.cancellation_requested
             found = True
     if not found:
         raise RuntimeError("ID not Found")
@@ -54,9 +54,9 @@ def terminate(user_id):
 def auto_on(user_id):
     user_id = int(user_id)
     found = False
-    for index in range(len(d)):
-        if d[index]['id'] == user_id:
-            d[index]['auto_recurring'] = True
+    for index in range(len(d['contracts'])):
+        if d['contracts'][index]['id'] == user_id:
+            d['contracts'][index]['auto_recurring'] = True
             found = True
     if not found:
         raise RuntimeError("ID not Found")
@@ -66,9 +66,9 @@ def auto_on(user_id):
 def auto_off(user_id):
     user_id = int(user_id)
     found = False
-    for index in range(len(d)):
-        if d[index]['id'] == user_id:
-            d[index]['auto_recurring'] = False
+    for index in range(len(d['contracts'])):
+        if d['contracts'][index]['id'] == user_id:
+            d['contracts'][index]['auto_recurring'] = False
             found = True
     if not found:
         raise RuntimeError("ID not Found")
