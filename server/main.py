@@ -23,7 +23,7 @@ def terminate(user_id):
     for index in range(len(d)):
         if d[index]['id'] == user_id:
             if d[index]['status'] != s.running:
-                raise RuntimeError("State of ID {} hast to be {} for termination".format(user_id, s.running))
+                raise RuntimeError("State of ID {} has to be {} for termination".format(user_id, s.running))
             d[index]['status'] = s.cancellation_requested
             found = True
     if not found:
