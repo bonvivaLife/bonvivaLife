@@ -8,6 +8,7 @@ import {
   decrement,
   decrementAsync
 } from '../../actions/counter'
+import {withRouter} from 'react-router'
 
 import Container from '../../components/Container'
 import ContractList from '../../components/ContractList'
@@ -23,7 +24,7 @@ const Overview = props => (
       <img src={Logo} />
       <ContractList>{
         props.contracts && props.contracts.map((contract, index) => (
-        <ContractRow contract={contract} key={contract.id || index} />))}
+        <ContractRow contract={contract} key={contract.id || index} to={`/detail/${contract.id}`}/>))}
       </ContractList>
     </OverviewContainer>
   </Container>
@@ -36,7 +37,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Overview)
+)(Overview))

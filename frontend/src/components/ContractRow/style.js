@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import theme from '../../theme'
+import Link from 'react-router-dom/Link';
+
 
 const getStatusColor = (status) => {
     switch(status) {
@@ -28,16 +30,29 @@ export const StatusBullet = styled.div`
     }
 `
 
-export const ContractRowWrapper = styled.li`
+export const ContractRowWrapper = styled(Link)`
     display: flex;
     flex-direction: row;
     margin: 0;
     padding: 0;
     padding: 24px;
-    border-bottom: 0.9px solid ${theme.lightGray};
+    border-top: 0.9px solid ${theme.lightGray};
+    background: #FFFFFF;
+    cursor: pointer;
+    text-decoration: none;
+    color: ${theme.darkBlue};
+
+    &:visited {
+        color: ${theme.darkBlue};
+    }
 
     > div:not(:last-child) {
         margin-right: 28px;
+    }
+    transition: background ease .2s;
+
+    &:hover {
+        background: #f5f5f5;
     }
 `
 
@@ -54,9 +69,24 @@ export const PriceInfo = styled.div`
     display: flex;
     align-items: center;
     text-align: right;
-    width: 18%;
+    width: 22%;
+    white-space: nowrap;
 
     > strong {
         font-weight: 600;
+    }
+`
+
+export const CaretContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 34px;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    > img {
+        height: 34px;
+        width: auto;
     }
 `

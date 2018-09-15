@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import Home from './Home'
 import About from './About'
 import Overview from './Overview'
+import Detail from './Detail'
 import {fetchContracts} from '../actions/data'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
@@ -28,6 +29,7 @@ class App extends React.Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/about-us" component={About} />
         <Route exact path="/overview" component={Overview} />
+        <Route path="/detail/:id" component={Detail} />
       </div>
     )
   }

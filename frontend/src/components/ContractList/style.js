@@ -8,6 +8,6 @@ width: 100%;
 list-style: none;
 padding: 0;
 margin: 0;
-border-top: 0.9px solid ${theme.lightGray};
+border-bottom: 0.9px solid ${theme.lightGray};
 
 `
