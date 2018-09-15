@@ -1,3 +1,5 @@
+import pickle
+
 orig_data = \
 {
         'balance':[],
@@ -42,3 +44,11 @@ orig_data = \
                 ]
 
         }
+
+with open('data.pkl', 'wb') as fp:
+        pickle.dump(orig_data, fp)
+
+def load_orig():
+    with open('data.pkl', 'rb') as fp:
+        d = pickle.load(fp)
+    return d

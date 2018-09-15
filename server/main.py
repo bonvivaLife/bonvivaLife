@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_restful import Resource, Api
 from flask_cors import CORS
 from tim import api as bankingApi
@@ -16,31 +16,38 @@ class HelloWorld(Resource):
 
 @app.route('/items', methods = ['GET'])
 def items():
-    balance = bankingApi.getBalance()
-    d["balance"] = balance
-    return jsonify(d)
-
-@app.route('/payments', methods = ['POST'])
-def payments():
-    user_id = int(user_id)
-    json = request.json
-    params = {
-        "Currency": json["currency"],
-        "Amount": json["amount"],
-        "Description": json["description"]
-    }
-    if (bankingApi.makePayment(params)):
+    try:
         balance = bankingApi.getBalance()
         d["balance"] = balance
+    except:
+        d["balance"] = { "Balance": 42, "Currency": "CHF" }, { "Balance": 112, "Currency": "EUR" }, { "Balance": -18, "Currency": "USD" }
+    return jsonify(d)
+
+@app.route('/payments/<currency>/<amount>/<description>', methods = ['POST'])
+def payments(currency, amount, description):
+    global d
+    amount = int(amount)
+    params = {
+        "Currency": currency,
+        "Amount": amount,
+        "Description": description
+    }
+    if (bankingApi.makePayment(params)):
+        try:
+            balance = bankingApi.getBalance()
+            d["balance"] = balance
+        except:
+            d["balance"] = { "Balance": 42, "Currency": "CHF" }, { "Balance": 112, "Currency": "EUR" }, { "Balance": -18, "Currency": "USD" }
         return jsonify(d)
     else:
         raise RuntimeError("Payment failed")
 
 @app.route('/items/<user_id>/terminate', methods = ['POST'])
 def terminate(user_id):
+    global d
     user_id = int(user_id)
     found = False
-    for index in range(len(d)):
+    for index in range(len(d['contracts'])):
         if d['contracts'][index]['id'] == user_id:
             if d['contracts'][index]['status'] != s.running:
                 raise RuntimeError("State of ID {} has to be {} for termination".format(user_id, s.running))
@@ -52,6 +59,7 @@ def terminate(user_id):
 
 @app.route('/items/<user_id>/auto_on', methods = ['POST'])
 def auto_on(user_id):
+    global d
     user_id = int(user_id)
     found = False
     for index in range(len(d['contracts'])):
@@ -64,6 +72,7 @@ def auto_on(user_id):
 
 @app.route('/items/<user_id>/auto_off', methods = ['POST'])
 def auto_off(user_id):
+    global d
     user_id = int(user_id)
     found = False
     for index in range(len(d['contracts'])):
@@ -76,7 +85,8 @@ def auto_off(user_id):
 
 @app.route('/reset', methods = ['POST'])
 def reset():
-    d = copy.deepcopy(data.orig_data)
+    global d
+    d = data.load_orig()
     return jsonify(d)
 
 @app.route('/pdf', methods = ['GET'])
@@ -85,7 +95,7 @@ def pdf():
 
 api.add_resource(HelloWorld, '/')
 
-d = copy.deepcopy(data.orig_data)
+d = data.load_orig()
 s = States()
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug=True)
