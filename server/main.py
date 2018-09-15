@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_restful import Resource, Api
 from flask_cors import CORS
+import copy
 from states import States
 import data
 
@@ -30,9 +31,33 @@ def terminate(user_id):
         raise RuntimeError("ID not Found")
     return jsonify(d)
 
+@app.route('/items/<user_id>/auto_on', methods = ['POST'])
+def auto_on(user_id):
+    user_id = int(user_id)
+    found = False
+    for index in range(len(d)):
+        if d[index]['id'] == user_id:
+            d[index]['auto_recurring'] = True
+            found = True
+    if not found:
+        raise RuntimeError("ID not Found")
+    return jsonify(d)
+
+@app.route('/items/<user_id>/auto_off', methods = ['POST'])
+def auto_off(user_id):
+    user_id = int(user_id)
+    found = False
+    for index in range(len(d)):
+        if d[index]['id'] == user_id:
+            d[index]['auto_recurring'] = False
+            found = True
+    if not found:
+        raise RuntimeError("ID not Found")
+    return jsonify(d)
+
 @app.route('/reset', methods = ['POST'])
 def reset():
-    d = data.orig_data
+    d = copy.deepcopy(data.orig_data)
     return jsonify(d)
 
 @app.route('/pdf', methods = ['GET'])
@@ -42,7 +67,7 @@ def pdf():
 api.add_resource(HelloWorld, '/')
 api.add_resource(items, '/items')
 
-d = data.orig_data
+d = copy.deepcopy(data.orig_data)
 s = States()
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', debug=True)
