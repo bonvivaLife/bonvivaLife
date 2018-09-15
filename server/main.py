@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_restful import Resource, Api
 from flask_cors import CORS
+from tim import api as bankingApi
 import copy
 from states import States
 import data
@@ -13,9 +14,27 @@ class HelloWorld(Resource):
     def get(self):
         return {'hello': 'world'}
 
-class items(Resource):
-    def get(self):
-        return d
+@app.route('/items', methods = ['GET'])
+def items():
+    balance = bankingApi.getBalance()
+    d["balance"] = balance
+    return jsonify(d)
+
+@app.route('/payments', methods = ['POST'])
+def payments():
+    user_id = int(user_id)
+    json = request.json
+    params = {
+        "Currency": json["currency"],
+        "Amount": json["amount"],
+        "Description": json["description"]
+    }
+    if (bankingApi.makePayment(params)):
+        balance = bankingApi.getBalance()
+        d["balance"] = balance
+        return jsonify(d)
+    else:
+        raise RuntimeError("Payment failed")
 
 @app.route('/items/<user_id>/terminate', methods = ['POST'])
 def terminate(user_id):
@@ -65,7 +84,6 @@ def pdf():
     return "8080:/formal_letter_4.pdf"
 
 api.add_resource(HelloWorld, '/')
-api.add_resource(items, '/items')
 
 d = copy.deepcopy(data.orig_data)
 s = States()

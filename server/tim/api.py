@@ -43,6 +43,7 @@ def getDateString():
 def getBalance():
     url = '{}/accounts/{}/balancecash'.format(base_url, cashaccountid)
     print(url)
+    print(requests.get(url, headers=headers))
     json = requests.get(url, headers=headers).json()
     print(json)
     ret = []
