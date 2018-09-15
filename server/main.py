@@ -35,6 +35,10 @@ def reset():
     d = data.orig_data
     return jsonify(d)
 
+@app.route('/pdf', methods = ['GET'])
+def pdf():
+    return "8080:/formal_letter_4.pdf"
+
 api.add_resource(HelloWorld, '/')
 api.add_resource(items, '/items')
 
