@@ -13,25 +13,32 @@ import {withRouter} from 'react-router'
 import Container from '../../components/Container'
 import ContractList from '../../components/ContractList'
 import ContractRow from '../../components/ContractRow'
+import Header from '../../components/Header'
 
 import {OverviewContainer} from './style'
-import Logo from '../../img/logo.png'
 
 
-const Overview = props => (
+const Overview = props => {
+  let chfBalance = props.balance.find(b => b.Currency === 'CHF')
+  if  (chfBalance) {
+    chfBalance = chfBalance.Balance
+  }
+
+  return (
   <Container>
     <OverviewContainer>
-      <img src={Logo} />
+      <Header balance={chfBalance}/>
       <ContractList>{
         props.contracts && props.contracts.map((contract, index) => (
         <ContractRow contract={contract} key={contract.id || index} to={`/detail/${contract.id}`}/>))}
       </ContractList>
     </OverviewContainer>
-  </Container>
-)
+  </Container>)
+}
 
 const mapStateToProps = state => ({
-  contracts: state.data.contracts
+  contracts: state.data.contracts,
+  balance: state.data.balance
 })
 
 const mapDispatchToProps = dispatch => ({

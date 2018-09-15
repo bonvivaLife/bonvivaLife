@@ -10,6 +10,7 @@ import {
   
   const initialState = {
     contracts: [],
+    balance: [],
     error: null,
     loading: false
   }
@@ -28,7 +29,8 @@ import {
               ...state,
               loading: false,
               error: null,
-              contracts: action.payload
+              contracts: action.payload.contracts,
+              balance: action.payload.balance
             }
   
         case FETCH_CONTRACTS_FAILED:
@@ -36,7 +38,8 @@ import {
               ...state,
               loading: false,
               error: action.payload,
-              contracts: []
+              contracts: [],
+              balance: []
             }
 
         default:

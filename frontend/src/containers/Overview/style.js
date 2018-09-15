@@ -13,12 +13,6 @@ export const OverviewContainer = styled.div`
     padding: 48px;
     color: ${theme.darkBlue};
 
-    > img {
-        width: 300px;
-        height: auto;
-        margin-bottom: 40px;
-    }
-
     > h1 {
         margin-top: 58px;
         margin-bottom: 58px;

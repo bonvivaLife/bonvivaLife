@@ -13,12 +13,12 @@ import Button from '../../components/Button'
 import ContractRow from '../../components/ContractRow'
 import KeyValueList from '../../components/KeyValueList'
 import SwitchRow from '../../components/SwitchRow'
+import Header from '../../components/Header'
 
 import Modal from 'react-modal';
 
 
 import {DetailContainer, Spacer, ButtonWrapper} from './style'
-import Logo from '../../img/logo.png'
 
 import Caret from '../../img/caret-left-white.svg'
 
@@ -74,13 +74,19 @@ class Detail extends React.Component{
   }
 
   render () {
-    const {match, contracts, changeAutoRenewal, ...otherProps} = this.props
+    const {match, contracts, changeAutoRenewal, balance, ...otherProps} = this.props
+
+    let chfBalance = balance.find(b => b.Currency === 'CHF')
+    if  (chfBalance) {
+      chfBalance = chfBalance.Balance
+    }
+
     const contract = contracts.find(c => c.id.toString() === match.params.id)
 
     if (!contract) {
       return (<Container>
         <DetailContainer>
-          <img src={Logo} />
+          <Header balance={balance}/>
           Contract unavailable
         </DetailContainer>
       </Container>)
@@ -91,7 +97,7 @@ class Detail extends React.Component{
     return (
       <Container>
         <DetailContainer>
-          <img src={Logo} />
+          <Header balance={chfBalance}/>
           <ContractRow contract={contract} hideCaret/>
           <KeyValueList
             pairs={
@@ -158,7 +164,8 @@ class Detail extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  contracts: state.data.contracts
+  contracts: state.data.contracts,
+  balance: state.data.balance
 })
 
 const mapDispatchToProps = dispatch => ({
