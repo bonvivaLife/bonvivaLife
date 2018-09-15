@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import theme from '../../theme'
 
 export const HeaderWrapper = styled.div`
     display: flex;
@@ -8,8 +8,16 @@ export const HeaderWrapper = styled.div`
     justify-content: space-between;
     margin-bottom: 40px;
     
-    > img {
+    > a > img {
         width: 300px;
         height: auto;
+
+        ${theme.s`
+            margin-bottom: 24px;
+        `}
     }
+
+    ${theme.s`
+        flex-direction: column;
+    `}
 `

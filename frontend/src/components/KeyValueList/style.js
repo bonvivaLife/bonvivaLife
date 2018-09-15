@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../theme'
 
 export const KeyValueTable = styled.table`
 
@@ -14,10 +15,17 @@ export const KeyValueTable = styled.table`
     
        > th {
             width: 40%;
+
+            ${theme.s`
+                width: 50%;
+            }`}
        }
 
        > td {
             width: 60%;
+            ${theme.s`
+                width: 50%;
+            }`}
        }
     }
 `

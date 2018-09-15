@@ -54,6 +54,14 @@ export const ContractRowWrapper = styled(Link)`
     &:hover {
         background: #f5f5f5;
     }
+
+    ${theme.s`
+        flex-direction: column;
+        > div {
+            width: 100%;
+            margin-bottom: 14px;
+        }
+    `}
 `
 
 export const Info = styled.div`
