@@ -23,6 +23,7 @@ export const LogoContainer = styled.div`
         margin-top: 58px;
         margin-bottom: 72px;
         font-size: 28px;
+        font-weight: 500;
     }
 
 

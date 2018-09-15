@@ -11,7 +11,7 @@ const Home = props => (
   <Container>
     <LogoContainer>
       <img src={Logo} />
-      <h1>Securing your data and contracts. <br /> Since 1892.</h1>
+      <h1>Securing your data and contracts. <br /> Since 1856.</h1>
       <Button to='/overview'>Get started</Button>
     </LogoContainer>
   </Container>

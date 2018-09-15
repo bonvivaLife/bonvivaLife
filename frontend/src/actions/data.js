@@ -47,3 +47,8 @@ export const orderContract = (id) => dispatch => {
     }).catch((e) => console.log(e))
 }
 
+export const resetData = () => dispatch => {
+    return axios.post(`http://18.202.59.170:5000/reset`).then(() => {
+        dispatch(fetchContracts())
+    }).catch((e) => console.log(e))
+}

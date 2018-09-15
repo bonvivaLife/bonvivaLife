@@ -43,6 +43,11 @@ export const ButtonWrapper = styled.button`
         height: 28px;
         vertical-align: middle;
     }
+
+    > span {
+        font-weight: 400;
+        font-style: italic;
+    }
 `
 
 export const ButtonLink = ButtonWrapper.withComponent(Link)

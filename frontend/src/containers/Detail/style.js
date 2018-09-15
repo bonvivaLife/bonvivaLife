@@ -28,3 +28,13 @@ export const DetailContainer = styled.div`
 export const Spacer = styled.div`
     height: 34px;
 `
+
+
+export const ButtonWrapper = styled.div`
+    margin-top: 24px;
+    display: flex;
+
+    > button:not(:last-child), > a:not(:last-child) {
+        margin-right: 18px;
+    }
+`
