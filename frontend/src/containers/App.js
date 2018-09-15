@@ -3,13 +3,46 @@ import { Route, Link } from 'react-router-dom'
 import Home from './Home'
 import About from './About'
 import Overview from './Overview'
+import {fetchContracts} from '../actions/data'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 
-const App = () => (
-  <div id='root-container'>
-    <Route exact path="/" component={Home} />
-    <Route exact path="/about-us" component={About} />
-    <Route exact path="/overview" component={Overview} />
-  </div>
-)
+class App extends React.Component {
 
-export default App
+  componentDidMount () {
+    this.refreshTimer = window.setInterval(this.refreshData, 300)
+  }
+
+  componentWillUnmount () {
+    window.clearInterval(this.refreshTimer)
+  }
+
+  refreshData = () => {
+    console.log('...refreshing contracts')
+    this.props.fetchContracts()
+  }
+
+  render () {
+    return (
+      <div id='root-container'>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/about-us" component={About} />
+        <Route exact path="/overview" component={Overview} />
+      </div>
+    )
+  }
+}
+  
+
+
+const mapStateToProps = state => ({
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchContracts: () => dispatch(fetchContracts())
+})
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App))
