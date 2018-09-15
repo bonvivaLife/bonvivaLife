@@ -28,3 +28,22 @@ export const fetchContractsFailed = (error) => ({
     type: FETCH_CONTRACTS_FAILED,
     payload: error
 })
+
+export const changeAutoRenewal = (id, newState) => dispatch => {
+    return axios.post(`http://18.202.59.170:5000/items/${id}/${newState ? 'auto_on' : 'auto_off'}`).then(() => {
+        dispatch(fetchContracts())
+    }).catch((e) => console.log(e))
+}
+
+export const cancelContract = (id) => dispatch => {
+    return axios.post(`http://18.202.59.170:5000/items/${id}/terminate`).then(() => {
+        dispatch(fetchContracts())
+    }).catch((e) => console.log(e))
+}
+
+export const orderContract = (id) => dispatch => {
+    return axios.post(`http://18.202.59.170:5000/items/${id}/order`).then(() => {
+        dispatch(fetchContracts())
+    }).catch((e) => console.log(e))
+}
+

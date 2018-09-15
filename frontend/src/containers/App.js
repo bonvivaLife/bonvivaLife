@@ -11,7 +11,7 @@ import {withRouter} from 'react-router'
 class App extends React.Component {
 
   componentDidMount () {
-    this.refreshTimer = window.setInterval(this.refreshData, 300)
+    this.refreshTimer = window.setTimeout(this.refreshData, 0)
   }
 
   componentWillUnmount () {

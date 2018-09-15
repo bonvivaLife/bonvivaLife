@@ -2,7 +2,8 @@
 import {
     FETCH_CONTRACTS,
     FETCH_CONTRACTS_SUCCEEDED,
-    FETCH_CONTRACTS_FAILED
+    FETCH_CONTRACTS_FAILED,
+    CHANGE_AUTO_RENEWAL
   } from '../actions/data'
   
   
@@ -37,7 +38,7 @@ import {
               error: action.payload,
               contracts: []
             }
-  
+
         default:
         return state
     }
