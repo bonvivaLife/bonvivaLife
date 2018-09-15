@@ -3,10 +3,24 @@ import theme from '../../theme'
 import { Link } from 'react-router-dom';
 
 
+const getBackgroundColor = (background) => {
+    switch(background) {
+        case 'red': return theme.red
+        case 'green': return theme.green
+        case 'fadedRed': return theme.fadedRed
+        default:
+        case 'blue': return theme.darkBlue
+
+    }
+}
+
 export const ButtonWrapper = styled.button`
     outline: none;
     appearance: none;
-    background: ${theme.darkBlue};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${p => getBackgroundColor(p.background)};
     color: white;
     padding: 18px 42px;
     font-size: 18px;
@@ -22,6 +36,12 @@ export const ButtonWrapper = styled.button`
 
     &:hover {
         background: #50385e;
+    }
+
+    > img {
+        width: 28px;
+        height: 28px;
+        vertical-align: middle;
     }
 `
 

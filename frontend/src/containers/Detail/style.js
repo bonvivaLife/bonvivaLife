@@ -23,6 +23,8 @@ export const DetailContainer = styled.div`
         margin-top: 58px;
         margin-bottom: 58px;
     }
-
-
 ` 
+
+export const Spacer = styled.div`
+    height: 34px;
+`
